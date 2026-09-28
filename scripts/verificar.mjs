@@ -131,7 +131,8 @@ try {
       [/onsurbe-abogados\.com/i, 'un enlace a la web de Onsurbe'],
       [/wa\.me\/\+?34\d{9}/, 'un WhatsApp dado por hecho'],
       [/años de experiencia/i, 'antigüedad inventada'],
-      [/clientes satisfechos|nuestros clientes|cientos de|miles de|opiniones de clientes/i, 'prueba social en plural']
+      [/clientes satisfechos|nuestros clientes|cientos de|miles de|opiniones de clientes/i, 'prueba social en plural'],
+      [/(1|una)( sola| única)? reseña|única reseña|la (primera|segunda) reseña/i, "el recuento de reseñas (con pocas no se dice cuántas hay)"]
     ];
     prohibidos.forEach(([re, que]) => comprobar(!re.test(texto), p + ': no aparece ' + que));
   }
@@ -302,9 +303,12 @@ try {
     if (conCapturas) await page.screenshot({ path: foto('10-resenas.png') });
     const cifra = await page.textContent('.resenas__cifra');
     const cuenta = await page.textContent('.resenas__cuenta');
-    comprobar(cifra.trim() === '5,0' && /^1 reseña/.test(cuenta.trim()), 'reseñas: 5,0 con 1 reseña, tal cual → ' + cifra.trim() + ' / ' + cuenta.trim());
+    comprobar(cifra.trim() === '5,0' && !/d/.test(cuenta.trim()), 'reseñas: 5,0 en Google sin decir cuántas reseñas hay → ' + cifra.trim() + ' / ' + cuenta.trim());
+    const enlaceResena = await page.$eval('.resenas__texto .boton', a => a.href);
+    comprobar(enlaceResena.includes("google.com/maps/place/Gestor") && enlaceResena.includes("!9m1!1b1") && !/g_ep|entry=/.test(enlaceResena), "reseñas: el botón abre la ficha real con las reseñas, sin parámetros de rastreo");
     const textoPagina = await page.evaluate(() => document.body.textContent);
     comprobar(!/clientes satisfechos|nuestros clientes|cientos de|miles de|opiniones de clientes|reseñas de clientes/i.test(textoPagina), 'reseñas: ninguna prueba social en plural en la página');
+    comprobar(!/(1|una)( sola| única)? reseña|la (primera|segunda) reseña/i.test(textoPagina), "reseñas: no se dice cuántas hay");
 
     await hasta(page, '#donde');
     if (conCapturas) await page.screenshot({ path: foto('11-donde.png') });

@@ -14,7 +14,7 @@ La mesa de cualquiera, vista desde arriba, llena de papeles que da pereza abrir:
 - **Marquesina a dos velocidades**: «Tráemelo» en mostaza sobre tinta y, detrás y en sentido contrario, lo que resuelve. Capacidad, no condiciones.
 - **Los papeles (servicios)**: una pila sticky de cinco hojas, cada una un poco girada, literalmente un montón. Tráfico (DGT), Fiscal, Contable, Laboral y Legal. Cada hoja que se posa manda un papelito volando a la **bandeja de «hecho»** fija en la esquina, que hace de indicador de progreso y **se grapa al final de la página**. La bandeja tiene fondo propio para leerse sobre papel y sobre linóleo, y sube por encima del aviso de cookies en móvil.
 - **Quién te lo lleva**: la tarjeta de visita de Jorge Miralles Nevado dibujada sobre la mesa, con el hueco de la foto marcado. Sin biografía inventada.
-- **Reseñas**: 5,0 ★ con **1** reseña en Google, dicho tal cual, con el enlace para dejar otra. Un test falla si aparece prueba social en plural. No se cita el texto de la reseña porque no lo tenemos.
+- **Reseñas**: 5,0 ★ en Google **sin decir cuántas reseñas hay** (con pocas, el recuento resta; regla del 28-09-2026), con el botón a la ficha real con las reseñas abiertas. Un test falla si aparece prueba social en plural o el recuento. No se cita el texto de la reseña porque no lo tenemos.
 - **Horario y dónde**: estado en vivo con `Europe/Madrid`, mapa de Google solo bajo clic (`maps?q=…&output=embed`, sin clave), WhatsApp con el token `NUMERO-PENDIENTE` y un diálogo que explica que falta confirmarlo.
 - **Pie**: la mesa despejada, con el café; la bandeja grapada queda fija en la esquina.
 
@@ -82,7 +82,7 @@ screenshots/        escritorio y móvil: cortina, hero a mitad de recoger y reco
 
 ```
 node scripts/servir.mjs              # http://127.0.0.1:4194/gestoria-jorge-miralles-badajoz-web/
-node scripts/verificar.mjs           # 134 comprobaciones con Playwright
+node scripts/verificar.mjs           # 140 comprobaciones con Playwright
 node scripts/verificar.mjs --capturas
 node scripts/contraste.mjs
 node scripts/versionar.mjs           # antes de cada commit que toque CSS o JS
@@ -96,7 +96,7 @@ node scripts/versionar.mjs           # antes de cada commit que toque CSS o JS
 - **Marquesina**: dos carriles a dos velocidades y sentidos.
 - **Pila**: las cinco hojas miden lo mismo; en página limpia bajando en pasos de 90 px nadie se suelta antes, nada asoma por debajo de la última, salen en bloque y no queda hueco.
 - **Bandeja**: cuenta 0 → 1 → 2 → 5, se ve de verdad (`elementFromPoint`) a media página y al final, con fondo propio, y se grapa al llegar al pie; en móvil sube por encima del aviso de cookies.
-- **Reseñas, horario, WhatsApp, mapa, cookies, mando**: 5,0 con 1 reseña; estado abierto/cerrado coincide con las franjas en Europe/Madrid; el WhatsApp abre el diálogo; el iframe del mapa solo existe tras el clic; las cookies cierran de verdad; sin `?revision` no hay mando ni se aplica una densidad guardada.
+- **Reseñas, horario, WhatsApp, mapa, cookies, mando**: 5,0 sin recuento y el botón a la ficha real; estado abierto/cerrado coincide con las franjas en Europe/Madrid; el WhatsApp abre el diálogo; el iframe del mapa solo existe tras el clic; las cookies cierran de verdad; sin `?revision` no hay mando ni se aplica una densidad guardada.
 - **Densidades**: la sobria quita la bandeja, pone el índice de texto, añade «qué traer» y deja el hero quieto y recogido; se puede volver.
 - **Móvil**: cuatro papeles, el menú abre y cierra, con la cabecera fija ocupa 100dvh con desenfoque; a 360×640, 375×667, 390×844 y 768×1024 el texto y los papeles no se pisan ni al entrar ni recogidos.
 - **Sin GSAP y con movimiento reducido**: la mesa se recoge sin viaje, el titular cambia, la bandeja cuenta, el horario se calcula.

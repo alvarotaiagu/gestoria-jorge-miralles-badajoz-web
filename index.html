@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<!--
+  Gestoría Jorge Miralles · gestor administrativo colegiado · Badajoz
+  Concepto: «Mesa despejada» — la mesa de cualquiera vista desde arriba, llena
+  de papeles que da pereza abrir. Al bajar, cada papel se recoge, se apila,
+  se grapa y en la mesa solo queda el café. «Tráemelo. Lo tuyo, fuera de tu mesa».
+
+  AVISO 1 — Esta maqueta lleva un MANDO DE DEMOSTRACIÓN (solo con ?revision)
+  que cambia entre dos densidades visuales. NO DEBE VIAJAR A PRODUCCIÓN.
+  Receta de borrado en README.md §"Quitar el mando de maqueta".
+
+  AVISO 2 — Datos sin confirmar marcados como [PENDIENTE]: fijo, formación,
+  número de colegiado, relación con Onsurbe Abogados, WhatsApp, horario de
+  verano y logo. La primera persona («tráemelo», «yo me encargo») está
+  pendiente de su visto bueno.
+-->
+<html lang="es" class="sin-js densidad-mesa">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestoría Jorge Miralles · Gestor administrativo colegiado en Badajoz</title>
+<meta name="description" content="Gestor administrativo colegiado en Badajoz. Renta, contabilidad, nóminas y el papel del coche. C/ Rafael Morales, 1, local B. Teléfono 653 477 183.">
+<meta name="theme-color" content="#4F6B5E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gestoría Jorge Miralles · Badajoz">
+<meta property="og:description" content="Lo tuyo, fuera de tu mesa. Renta, contabilidad, nóminas y el papel del coche, con un gestor administrativo colegiado en Badajoz.">
+<meta property="og:image" content="assets/og-miralles.png">
+<meta property="og:locale" content="es_ES">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/estilos.css?v=213467a8">
+<script>
+/* Bloqueante a propósito: la densidad se resuelve antes del primer pintado.
+   [MANDO DE MAQUETA] — la parte de la densidad es eliminable, ver README. */
+(function () {
+  var h = document.documentElement;
+  h.classList.remove('sin-js');
+  h.classList.add('con-js');
+  /* red de seguridad por si main.js no llega: la cortina nunca tapa la página */
+  setTimeout(function () {
+    var c = document.getElementById('cortina');
+    if (c) c.classList.add('fuera');
+    h.classList.remove('cortina-activa');
+  }, 8000);
+  /* la densidad guardada solo cuenta en modo revisión (?revision) */
+  if (!/[?&]revision\b/.test(location.search)) return;
+  try {
+    var d = localStorage.getItem('miralles-densidad');
+    if (d === 'sobria' || d === 'mesa') {
+      h.classList.remove('densidad-mesa', 'densidad-sobria');
+      h.classList.add('densidad-' + d);
+    }
+  } catch (e) {}
+})();
+</script>
+<noscript><style>.cortina { display: none !important; }</style></noscript>
+</head>
+<body>
+
+<a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+
+<!-- ───────── Sprite: marca provisional (una hoja grapada) y la taza ───────── -->
+<svg class="visualmente-oculto" aria-hidden="true" focusable="false" width="0" height="0">
+  <symbol id="logo" viewBox="0 0 48 48">
+    <g transform="rotate(-8 24 24)">
+      <rect x="11" y="7" width="26" height="34" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M16 20h16M16 25h16M16 30h11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <path class="logo-grapa" d="M15 12.5v-3.5h6v3.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    </g>
+  </symbol>
+  <symbol id="taza-svg" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="64" rx="54" ry="50" fill="rgba(0,0,0,.28)"/>
+    <circle cx="58" cy="58" r="50" fill="#F4EFE6"/>
+    <circle cx="58" cy="58" r="43" fill="#E7E0D4"/>
+    <circle cx="58" cy="58" r="36" fill="#F4EFE6"/>
+    <circle cx="58" cy="58" r="31" fill="#3A2518"/>
+    <circle cx="58" cy="58" r="31" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="3"/>
+    <ellipse cx="50" cy="50" rx="12" ry="6" fill="rgba(255,255,255,.14)" transform="rotate(-30 50 50)"/>
+    <path d="M92 44c16 0 22 8 22 16s-6 16-22 16" fill="none" stroke="#F4EFE6" stroke-width="9" stroke-linecap="round"/>
+    <path d="M92 44c16 0 22 8 22 16s-6 16-22 16" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- ═══════════ Cortina: cae una hoja en blanco y alguien la aparta de la mesa ═══════════ -->
+<div class="cortina" id="cortina" aria-hidden="true">
+  <div class="cortina__fondo" id="cortina-fondo">
+    <svg class="cortina__labio" viewBox="0 0 10 100" preserveAspectRatio="none" focusable="false"><path id="cortina-labio-path" d="M10 0V100H10Q10 50 10 0Z"/></svg>
+    <div class="cortina__hoja" id="cortina-hoja">
+      <p class="cortina__nombre"><span><b>Gestoría</b></span><span><b>Jorge <i>Miralles</i></b></span></p>
+      <p class="cortina__pie" id="cortina-pie">Gestor administrativo colegiado · Badajoz</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Cabecera ═══════════ -->
+<header class="cabecera" id="cabecera">
+  <a class="cabecera__marca" href="#inicio" aria-label="Gestoría Jorge Miralles, Badajoz: volver al inicio">
+    <svg class="cabecera__logo" width="40" height="40" aria-hidden="true" focusable="false"><use href="#logo" width="40" height="40"/></svg>
+    <span class="cabecera__nombre">Jorge Miralles<small>Gestoría · Badajoz</small></span>
+  </a>
+  <nav class="cabecera__nav" id="menu" aria-label="Principal">
+    <a href="#papeles">Los papeles</a>
+    <a href="#quien">Quién</a>
+    <a href="#donde">Horario y dónde</a>
+    <a class="cabecera__llamar-movil" href="tel:+34653477183">Llamar · 653 477 183</a>
+  </nav>
+  <a class="boton boton--linea cabecera__llamar iman" href="tel:+34653477183"><span>653 477 183</span></a>
+  <button class="hamburguesa" id="hamburguesa" type="button" aria-expanded="false" aria-controls="menu">
+    <span class="visualmente-oculto">Abrir menú</span>
+    <span class="hamburguesa__linea"></span>
+    <span class="hamburguesa__linea"></span>
+  </button>
+</header>
+
+<main id="contenido">
+
+  <!-- ═══════════ Hero: la mesa, y al bajar se recoge ═══════════ -->
+  <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+    <div class="hero__texto">
+      <p class="antetitulo">Gestoría · Badajoz</p>
+      <h1 class="hero__titulo" id="hero-titulo" aria-label="¿Así está tu mesa? Lo tuyo, fuera de tu mesa.">
+        <span class="hero__frase hero__frase--antes" id="frase-antes" data-revelar="letras" aria-hidden="true">¿Así está <em>tu mesa?</em></span>
+        <span class="hero__frase hero__frase--despues" id="frase-despues" data-revelar="letras" data-revelar-manual aria-hidden="true">Lo tuyo, <em>fuera de tu mesa.</em></span>
+      </h1>
+      <p class="hero__entrada">Gestor administrativo colegiado en Badajoz. Renta, contabilidad, nóminas y el papel del coche.</p>
+      <div class="hero__acciones">
+        <a class="boton boton--mostaza iman" href="tel:+34653477183"><span>Llamar · 653 477 183</span></a>
+        <a class="enlace" href="https://www.google.com/maps/search/?api=1&amp;query=Gestor%C3%ADa+Jorge+Miralles%2C+Calle+Rafael+Morales+1%2C+06005+Badajoz" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+      <p class="hero__nota">C/ Rafael Morales, 1, local B · 06005 Badajoz</p>
+    </div>
+
+    <div class="hero__mesa" id="mesa" aria-hidden="true">
+      <!-- seis papeles genéricos: sin nombres, matrículas ni importes -->
+      <article class="papel" data-papel="multa" style="--x:46%;--y:12%;--r:-9deg;--z:1;--mx:6%;--my:6%;--mr:-8deg;--i:0">
+        <div class="papel__hoja"><span class="papel__sombra"></span><span class="papel__sombra papel__sombra--alta"></span><span class="papel__marca">MULTA</span><small>Boletín de denuncia</small><strong>Tráfico</strong><div class="papel__renglones"></div></div>
+      </article>
+      <article class="papel" data-papel="303" style="--x:68%;--y:11%;--r:12deg;--z:2;--mx:52%;--my:2%;--mr:10deg;--i:1">
+        <div class="papel__hoja"><span class="papel__sombra"></span><span class="papel__sombra papel__sombra--alta"></span><small>Modelo 303</small><strong>IVA · 3.<sup>er</sup> trimestre</strong><div class="papel__renglones"></div></div>
+      </article>
+      <article class="papel" data-papel="contrato" style="--x:55%;--y:44%;--r:5deg;--z:3;--mx:28%;--my:42%;--mr:4deg;--i:2">
+        <div class="papel__hoja"><span class="papel__sombra"></span><span class="papel__sombra papel__sombra--alta"></span><small>Contrato</small><strong>Compraventa de vehículo</strong><div class="papel__renglones"></div></div>
+      </article>
+      <article class="papel papel--extra" data-papel="nomina" style="--x:41%;--y:62%;--r:-15deg;--z:4;--i:3">
+        <div class="papel__hoja"><span class="papel__sombra"></span><span class="papel__sombra papel__sombra--alta"></span><small>Nómina</small><strong>Recibo de salarios</strong><div class="papel__renglones"></div></div>
+      </article>
+      <article class="papel" data-papel="carta" style="--x:76%;--y:50%;--r:-6deg;--z:5;--mx:60%;--my:48%;--mr:-7deg;--i:4">
+        <div class="papel__hoja"><span class="papel__sombra"></span><span class="papel__sombra papel__sombra--alta"></span><span class="papel__marca">AEAT</span><small>Carta de Hacienda</small><strong>Requerimiento</strong><div class="papel__renglones"></div></div>
+      </article>
+      <article class="papel papel--extra" data-papel="alta" style="--x:62%;--y:70%;--r:8deg;--z:6;--i:5">
+        <div class="papel__hoja"><span class="papel__sombra"></span><span class="papel__sombra papel__sombra--alta"></span><small>RETA</small><strong>Alta de autónomo</strong><div class="papel__renglones"></div></div>
+      </article>
+      <span class="grapa" id="grapa"></span>
+      <span class="taza" id="taza"><svg aria-hidden="true" focusable="false"><use href="#taza-svg"/></svg></span>
+    </div>
+
+    <p class="hero__desliza" aria-hidden="true">Baja y se recoge la mesa</p>
+  </section>
+
+  <!-- ═══════════ Marquesina a dos velocidades ═══════════ -->
+  <div class="marquesina" aria-hidden="true">
+    <div class="marquesina__carril marquesina__carril--estribillo" id="carril-estribillo" data-velocidad="0.9">
+      <div class="marquesina__grupo"><span>Tráemelo</span><i></i><span>Tráemelo</span><i></i><span>Tráemelo</span><i></i></div>
+    </div>
+    <div class="marquesina__carril marquesina__carril--lista" id="carril-lista" data-velocidad="-0.45">
+      <div class="marquesina__grupo"><span>la multa</span><i></i><span>el 303</span><i></i><span>el contrato del coche</span><i></i><span>la nómina</span><i></i><span>la carta de Hacienda</span><i></i><span>el alta de autónomo</span><i></i><span>la renta</span><i></i></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Los papeles: una hoja por área, apiladas ═══════════ -->
+  <section class="papeles" id="papeles" aria-labelledby="papeles-titulo">
+    <div class="papeles__cabeza">
+      <p class="antetitulo">Los papeles</p>
+      <h2 class="titulo" id="papeles-titulo" data-revelar="palabras">Cada papel, <em>a su sitio.</em></h2>
+      <p class="papeles__entrada">Cinco hojas, una por cada cosa que llevo. La que te toca a ti, me la traes y se va a la bandeja de hecho.</p>
+    </div>
+
+    <ol class="pila" id="pila">
+      <li class="pila__item" id="hoja-trafico" style="--r:-1.2deg">
+        <article class="hoja" aria-labelledby="t-trafico">
+          <span class="hoja__marca" aria-hidden="true">DGT</span>
+          <div class="hoja__texto">
+            <p class="hoja__num">Hoja 1 de 5 · Tráfico</p>
+            <h3 id="t-trafico">El papel del coche</h3>
+            <p class="hoja__lema">Vendes, compras, das de baja: yo voy a Tráfico.</p>
+            <p>Transferencias, matriculaciones, bajas y duplicados ante la DGT, sin que tengas que pedir cita ni hacer cola.</p>
+            <a class="enlace" href="tel:+34653477183">Tráemelo · 653 477 183</a>
+          </div>
+          <div class="hoja__lado">
+            <p class="hoja__lista-titulo">Qué llevo</p>
+            <ul class="hoja__lista"><li>Transferencias de vehículos</li><li>Matriculaciones</li><li>Bajas</li><li>Duplicados</li></ul>
+            <div class="hoja__traer">
+              <p>Qué traer · transferencia de vehículo</p>
+              <ul><li>DNI de comprador y vendedor</li><li>Permiso de circulación</li><li>Ficha técnica con la ITV en vigor</li><li>Contrato de compraventa</li></ul>
+              <small>Lista orientativa · confirmar con Jorge</small>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="pila__item" id="hoja-fiscal" style="--r:.9deg">
+        <article class="hoja" aria-labelledby="t-fiscal">
+          <span class="hoja__marca" aria-hidden="true">AEAT</span>
+          <div class="hoja__texto">
+            <p class="hoja__num">Hoja 2 de 5 · Fiscal</p>
+            <h3 id="t-fiscal">La renta y los trimestres</h3>
+            <p class="hoja__lema">La carta de Hacienda, la abro yo.</p>
+            <p>Renta (IRPF), IVA, trimestres y requerimientos. Lo presento a su hora y, si llega una carta, la contesto.</p>
+            <a class="enlace" href="tel:+34653477183">Tráemelo · 653 477 183</a>
+          </div>
+          <div class="hoja__lado">
+            <p class="hoja__lista-titulo">Qué llevo</p>
+            <ul class="hoja__lista"><li>Declaración de la renta (IRPF)</li><li>IVA</li><li>Trimestres</li><li>Requerimientos de Hacienda</li></ul>
+            <div class="hoja__traer">
+              <p>Qué traer · declaración de la renta</p>
+              <ul><li>DNI y referencia de la renta anterior</li><li>Certificados de retenciones (trabajo, banco)</li><li>Justificantes de lo deducible (vivienda, donativos)</li></ul>
+              <small>Lista orientativa · confirmar con Jorge</small>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="pila__item" id="hoja-contable" style="--r:-.6deg">
+        <article class="hoja" aria-labelledby="t-contable">
+          <span class="hoja__marca" aria-hidden="true">LIBROS</span>
+          <div class="hoja__texto">
+            <p class="hoja__num">Hoja 3 de 5 · Contable</p>
+            <h3 id="t-contable">Las cuentas al día</h3>
+            <p class="hoja__lema">Facturas fuera de la caja de zapatos.</p>
+            <p>Contabilidad de autónomos y sociedades y cuentas anuales. Sabes cómo va el negocio sin esperar al cierre.</p>
+            <a class="enlace" href="tel:+34653477183">Tráemelo · 653 477 183</a>
+          </div>
+          <div class="hoja__lado">
+            <p class="hoja__lista-titulo">Qué llevo</p>
+            <ul class="hoja__lista"><li>Contabilidad de autónomos</li><li>Contabilidad de sociedades</li><li>Cuentas anuales</li></ul>
+            <div class="hoja__traer">
+              <p>Qué traer · contabilidad del trimestre</p>
+              <ul><li>Facturas emitidas y recibidas</li><li>Extractos bancarios del periodo</li><li>Recibos de cuotas y seguros</li></ul>
+              <small>Lista orientativa · confirmar con Jorge</small>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="pila__item" id="hoja-laboral" style="--r:1.1deg">
+        <article class="hoja" aria-labelledby="t-laboral">
+          <span class="hoja__marca" aria-hidden="true">TGSS</span>
+          <div class="hoja__texto">
+            <p class="hoja__num">Hoja 4 de 5 · Laboral</p>
+            <h3 id="t-laboral">Altas, contratos y nóminas</h3>
+            <p class="hoja__lema">Cada alta y cada nómina, en regla.</p>
+            <p>Altas, contratos, nóminas y Seguridad Social, de quien tiene gente a su cargo y de quien trabaja por su cuenta.</p>
+            <a class="enlace" href="tel:+34653477183">Tráemelo · 653 477 183</a>
+          </div>
+          <div class="hoja__lado">
+            <p class="hoja__lista-titulo">Qué llevo</p>
+            <ul class="hoja__lista"><li>Altas y bajas</li><li>Contratos</li><li>Nóminas</li><li>Seguridad Social</li></ul>
+            <div class="hoja__traer">
+              <p>Qué traer · alta de un trabajador</p>
+              <ul><li>DNI y número de la Seguridad Social</li><li>Datos del contrato (puesto, jornada, duración)</li><li>Cuenta bancaria para la nómina</li></ul>
+              <small>Lista orientativa · confirmar con Jorge</small>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="pila__item" id="hoja-legal" style="--r:-.8deg">
+        <article class="hoja" aria-labelledby="t-legal">
+          <span class="hoja__marca" aria-hidden="true">SOCIEDADES</span>
+          <div class="hoja__texto">
+            <p class="hoja__num">Hoja 5 de 5 · Legal</p>
+            <h3 id="t-legal">Sociedades y defensa</h3>
+            <p class="hoja__lema">Lo que no cabe en un papel.</p>
+            <p>Constitución de sociedades y defensa, en colaboración con Onsurbe Abogados. <span class="marca-pendiente">[PENDIENTE: cómo contar la relación con Onsurbe y si se enlaza]</span></p>
+            <a class="enlace" href="tel:+34653477183">Cuéntamelo · 653 477 183</a>
+          </div>
+          <div class="hoja__lado">
+            <p class="hoja__lista-titulo">Qué llevo</p>
+            <ul class="hoja__lista"><li>Constitución de sociedades</li><li>Defensa, con Onsurbe Abogados</li></ul>
+            <div class="hoja__traer">
+              <p>Qué traer · constituir una sociedad</p>
+              <ul><li>DNI de los socios</li><li>Nombre elegido para la sociedad</li><li>Capital y reparto entre socios</li></ul>
+              <small>Lista orientativa · confirmar con Jorge</small>
+            </div>
+          </div>
+        </article>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ═══════════ Quién te lo lleva: la tarjeta de visita sobre la mesa ═══════════ -->
+  <section class="quien" id="quien" aria-labelledby="quien-titulo">
+    <div class="quien__texto">
+      <p class="antetitulo">Quién te lo lleva</p>
+      <h2 class="titulo" id="quien-titulo" data-revelar="palabras">Soy Jorge. <em>Tráemelo.</em></h2>
+      <p>Llevo la gestoría de la calle Rafael Morales, en Badajoz. Gestor administrativo colegiado: la renta, la contabilidad, las nóminas y el papel del coche pasan por mi mesa para que salgan de la tuya.</p>
+      <p class="quien__nota">Tarjeta con datos por confirmar: <span class="marca-pendiente">[PENDIENTE: formación]</span> <span class="marca-pendiente">[PENDIENTE: n.º de colegiado y colegio]</span> <span class="marca-pendiente">[PENDIENTE: teléfono fijo]</span></p>
+    </div>
+    <div class="tarjeta" role="img" aria-label="Tarjeta de visita de Jorge Miralles Nevado, gestor administrativo colegiado, con la dirección y el teléfono">
+      <div>
+        <p class="tarjeta__nombre">Jorge Miralles Nevado</p>
+        <p class="tarjeta__oficio">Gestor administrativo colegiado</p>
+      </div>
+      <div class="tarjeta__foto" aria-hidden="true">[PENDIENTE: foto]</div>
+      <address class="tarjeta__datos">
+        <span>Gestoría Jorge Miralles · Badajoz</span>
+        <span>C/ Rafael Morales, 1, local B · 06005</span>
+        <a href="tel:+34653477183">653 477 183</a>
+        <a href="mailto:jorge.miralles@miralles-onsurbe.com">jorge.miralles@miralles-onsurbe.com</a>
+      </address>
+    </div>
+  </section>
+
+  <!-- ═══════════ Reseñas: lo que hay, tal cual ═══════════ -->
+  <section class="resenas sobre-papel" id="resenas" aria-labelledby="resenas-titulo">
+    <div class="resenas__nota">
+      <span class="resenas__cifra" data-contador="5" data-decimales="1">5,0</span>
+      <span class="resenas__estrellas" aria-hidden="true">★★★★★</span>
+      <p class="resenas__cuenta">1 reseña en Google</p>
+    </div>
+    <div class="resenas__texto">
+      <p class="antetitulo antetitulo--papel">Reseñas</p>
+      <h2 class="titulo" id="resenas-titulo" data-revelar="palabras">Una reseña, <em>de cinco estrellas.</em></h2>
+      <p>En Google hay una sola reseña de la gestoría, y es de cinco estrellas. Si has pasado por aquí, la tuya es la segunda.</p>
+      <a class="boton boton--tinta iman" href="https://www.google.com/maps/search/?api=1&amp;query=Gestor%C3%ADa+Jorge+Miralles%2C+Calle+Rafael+Morales+1%2C+06005+Badajoz" target="_blank" rel="noopener"><span>Dejar una reseña en Google</span></a>
+    </div>
+  </section>
+
+  <!-- ═══════════ Horario y dónde ═══════════ -->
+  <section class="donde" id="donde" aria-labelledby="donde-titulo">
+    <div class="donde__cabeza">
+      <p class="antetitulo">Horario y dónde</p>
+      <h2 class="titulo" id="donde-titulo" data-revelar="palabras">Pásate, llama <em>o escríbeme.</em></h2>
+    </div>
+    <div class="donde__cuerpo">
+      <div>
+        <p class="horario__estado" id="horario-estado" aria-live="polite">Consultando el horario…</p>
+        <table class="horario__tabla" id="horario-tabla">
+          <caption class="visualmente-oculto">Horario de atención</caption>
+          <tbody>
+            <tr data-dias="1,2,3,4"><th scope="row">Lunes a jueves</th><td>8:30–14:00 y 17:00–19:30</td></tr>
+            <tr data-dias="5"><th scope="row">Viernes</th><td>8:30–14:30</td></tr>
+            <tr data-dias="6,0"><th scope="row">Sábado y domingo</th><td>Cerrado</td></tr>
+          </tbody>
+        </table>
+        <p class="horario__nota">Horario de verano: <span class="marca-pendiente">[PENDIENTE: confirmar si cambia en julio y agosto]</span></p>
+      </div>
+      <dl class="datos">
+        <div class="datos__fila">
+          <dt>La gestoría</dt>
+          <dd>C/ Rafael Morales, 1, local B<br>06005 Badajoz</dd>
+        </div>
+        <div class="datos__fila">
+          <dt>Teléfono</dt>
+          <dd><a class="datos__telefono" href="tel:+34653477183">653 477 183</a></dd>
+        </div>
+        <div class="datos__fila">
+          <dt>Correo</dt>
+          <dd><a href="mailto:jorge.miralles@miralles-onsurbe.com">jorge.miralles@miralles-onsurbe.com</a></dd>
+        </div>
+        <div class="datos__acciones">
+          <a class="boton boton--mostaza iman" href="tel:+34653477183"><span>Llamar</span></a>
+          <a class="boton boton--linea iman" id="whatsapp" href="https://wa.me/NUMERO-PENDIENTE" rel="noopener"><span>WhatsApp</span></a>
+          <a class="enlace" href="https://www.google.com/maps/search/?api=1&amp;query=Gestor%C3%ADa+Jorge+Miralles%2C+Calle+Rafael+Morales+1%2C+06005+Badajoz" target="_blank" rel="noopener">Cómo llegar (abre Google Maps)</a>
+        </div>
+      </dl>
+      <div class="mapa">
+        <div class="map-consent" id="mapa-consentimiento" data-map-src="https://www.google.com/maps?q=Gestor%C3%ADa+Jorge+Miralles%2C+Calle+Rafael+Morales+1%2C+06005+Badajoz&amp;output=embed">
+          <svg class="map-consent__plano" viewBox="0 0 320 200" aria-hidden="true" focusable="false">
+            <path class="mc-calle" d="M-10 150C60 138 120 120 180 96S290 50 330 44"/>
+            <path class="mc-calle mc-calle--fina" d="M60 -10 110 210M200 -10 170 210M-10 70H330"/>
+            <circle class="mc-punto" cx="164" cy="104" r="6"/>
+            <circle class="mc-onda" cx="164" cy="104" r="16"/>
+          </svg>
+          <p class="map-consent__texto">El mapa lo sirve Google, que pone sus propias cookies. Solo se carga si lo pides.</p>
+          <button class="boton boton--mini" id="mapa-boton" type="button">Cargar el mapa</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════ Pie: la mesa ya despejada ═══════════ -->
+<footer class="pie" id="pie">
+  <div class="pie__mesa">
+    <span class="pie__taza" aria-hidden="true"><svg focusable="false"><use href="#taza-svg"/></svg></span>
+    <p><span class="pie__nombre">Gestoría Jorge Miralles</span><span class="pie__lema">En la mesa, solo el café.</span><br>Gestor administrativo colegiado<br>C/ Rafael Morales, 1, local B · 06005 Badajoz</p>
+  </div>
+  <div class="pie__columna">
+    <h2>Llamar</h2>
+    <p><a href="tel:+34653477183">653 477 183</a></p>
+    <p><a href="mailto:jorge.miralles@miralles-onsurbe.com">Escribir un correo</a></p>
+  </div>
+  <div class="pie__columna">
+    <h2>En esta página</h2>
+    <p><a href="#papeles">Los papeles</a></p>
+    <p><a href="#quien">Quién te lo lleva</a></p>
+    <p><a href="#donde">Horario y dónde</a></p>
+  </div>
+  <div class="pie__legal">
+    <p>© <span id="anio">2026</span> Jorge Miralles Nevado · <span class="marca-pendiente">[PENDIENTE: NIF y colegio profesional]</span></p>
+    <p><a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad y cookies</a></p>
+    <p class="pie__creditos">Maqueta de presentación. Papeles, taza y marca provisional dibujados para esta web; ningún documento imita a uno oficial. Tipografías Instrument Serif y Figtree (licencia OFL).</p>
+  </div>
+</footer>
+
+<!-- la bandeja de «hecho»: fija, se llena con cada hoja y se grapa al final -->
+<div class="bandeja" id="bandeja" aria-live="polite" aria-label="Papeles resueltos">
+  <div class="bandeja__caja" id="bandeja-caja">
+    <span class="bandeja__hoja" data-hoja="1" style="--r:-6deg;--ox:-3px;--oy:2px"></span>
+    <span class="bandeja__hoja" data-hoja="2" style="--r:4deg;--ox:2px;--oy:0px"></span>
+    <span class="bandeja__hoja" data-hoja="3" style="--r:-2deg;--ox:-1px;--oy:-2px"></span>
+    <span class="bandeja__hoja" data-hoja="4" style="--r:3deg;--ox:3px;--oy:-3px"></span>
+    <span class="bandeja__hoja" data-hoja="5" style="--r:-1deg;--ox:0px;--oy:-4px"></span>
+    <span class="grapa bandeja__grapa" aria-hidden="true"></span>
+  </div>
+  <span class="bandeja__cuenta"><b id="bandeja-n">0</b> / 5</span>
+  <span class="bandeja__rotulo" id="bandeja-rotulo">hecho</span>
+</div>
+<!-- índice de texto: solo en la densidad sobria -->
+<ol class="indice" id="indice" aria-label="Progreso por los papeles">
+  <li data-i="1">Tráfico</li><li data-i="2">Fiscal</li><li data-i="3">Contable</li><li data-i="4">Laboral</li><li data-i="5">Legal</li>
+</ol>
+
+<!-- WhatsApp sin confirmar: el enlace lleva el token y el clic explica por qué -->
+<dialog class="dialogo" id="wa-dialogo" aria-labelledby="wa-titulo">
+  <h2 id="wa-titulo">WhatsApp, pendiente</h2>
+  <p>Todavía no está confirmado que este móvil tenga WhatsApp. Mientras tanto, lo más rápido es llamar al 653 477 183 o escribir a jorge.miralles@miralles-onsurbe.com.</p>
+  <div class="dialogo__acciones">
+    <a class="boton boton--tinta boton--mini" href="tel:+34653477183">Llamar</a>
+    <button class="boton boton--mini" id="wa-cerrar" type="button">Cerrar</button>
+  </div>
+</dialog>
+
+<!-- ═══════════ Aviso de cookies ═══════════ -->
+<div class="cookies" id="cookies" hidden>
+  <p class="cookies__texto">
+    Esta web no usa cookies de seguimiento. Solo guarda en tu navegador que ya has visto este aviso
+    y, si lo pides, carga el mapa de Google, que sí pone las suyas. <a href="privacidad.html">Más detalle</a>.
+  </p>
+  <div class="cookies__acciones">
+    <button class="boton boton--tinta boton--mini" id="cookies-aceptar" type="button">De acuerdo</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     [MANDO DE MAQUETA] — SOLO REVISIÓN INTERNA. NO PUBLICAR.
+     Borrar este bloque, el bloque CSS marcado igual en estilos.css, el bloque
+     JS marcado igual en main.js y la parte de densidad del script del <head>.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="mando" id="mando" hidden>
+  <span class="mando__titulo">Versión</span>
+  <div class="mando__botones" role="group" aria-label="Densidad visual de la maqueta">
+    <button type="button" data-densidad="mesa" aria-pressed="true">Mesa</button>
+    <button type="button" data-densidad="sobria" aria-pressed="false">Sobria</button>
+  </div>
+  <span class="mando__pie">Dos versiones de la misma web</span>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  "name": "Gestoría Jorge Miralles",
+  "description": "Gestor administrativo colegiado en Badajoz: renta, contabilidad, nóminas y trámites de tráfico.",
+  "telephone": "+34653477183",
+  "email": "jorge.miralles@miralles-onsurbe.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle Rafael Morales, 1, local B",
+    "addressLocality": "Badajoz",
+    "postalCode": "06005",
+    "addressRegion": "Badajoz",
+    "addressCountry": "ES"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "08:30", "closes": "14:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "17:00", "closes": "19:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:30", "closes": "14:30" }
+  ],
+  "areaServed": "Badajoz"
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="js/main.js?v=68cd5d91" defer></script>
+</body>
+</html>

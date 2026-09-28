@@ -1,0 +1,9 @@
+{
+  "name": "Gestoría Jorge Miralles · Badajoz",
+  "short_name": "Miralles",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#4F6B5E",
+  "theme_color": "#4F6B5E",
+  "icons": [{ "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

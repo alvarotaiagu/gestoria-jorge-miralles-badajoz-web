@@ -155,6 +155,24 @@ try {
     comprobar(/ResizeObserver/.test(js) && /ST\.refresh\(\)/.test(js), 'JS: ResizeObserver + ScrollTrigger.refresh()');
   }
 
+  /* ───── 0 bis. el nombre de la cortina cabe entero en la hoja a cualquier ancho ───── */
+  for (const viewport of [{ width: 360, height: 640 }, { width: 390, height: 844 }, { width: 1366, height: 768 }, { width: 1920, height: 1080 }, { width: 2560, height: 1440 }]) {
+    const { contexto, page } = await nuevaPagina(navegador, { viewport });
+    await page.goto(base + '/index.html', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => document.fonts.ready.then(() => 0));
+    await page.waitForTimeout(700);
+    const r = await page.evaluate(() => {
+      const hoja = document.getElementById('cortina-hoja');
+      const spans = [...document.querySelectorAll('.cortina__nombre span')];
+      const pie = document.getElementById('cortina-pie');
+      const lineas = Math.round(pie.offsetHeight / parseFloat(getComputedStyle(pie).lineHeight));
+      return { recortes: spans.map(s => s.scrollWidth - s.clientWidth), lineasPie: lineas, anchoTexto: spans[0].clientWidth, anchoHoja: hoja.offsetWidth };
+    });
+    comprobar(r.recortes.every(d => d <= 1) && r.lineasPie <= 2 && r.anchoTexto > r.anchoHoja * 0.7,
+      `cortina ${viewport.width}×${viewport.height}: «Gestoría / Jorge Miralles» sin cortar → ` + JSON.stringify(r));
+    await contexto.close();
+  }
+
   /* ───── 1. escritorio, pasada normal ───── */
   {
     const { contexto, page, errores, caidas } = await nuevaPagina(navegador);
@@ -253,14 +271,15 @@ try {
     /* marquesina a dos velocidades */
     await hasta(page, '.marquesina');
     const marq = await page.evaluate(async () => {
-      const leer = () => ['carril-estribillo', 'carril-lista'].map(id => new DOMMatrix(getComputedStyle(document.getElementById(id)).transform).m41);
+      const leer = () => new DOMMatrix(getComputedStyle(document.getElementById('carril-lista')).transform).m41;
       const a = leer();
       await new Promise(r => setTimeout(r, 500));
-      const b = leer();
-      return { estribillo: b[0] - a[0], lista: b[1] - a[1] };
+      const veces = (document.querySelector('.marquesina').textContent.match(/Tráemelo/g) || []).length;
+      const e = document.querySelector('.marquesina__estribillo').getBoundingClientRect();
+      return { avance: leer() - a, veces, estribilloVisible: e.width > 0 && e.left >= 0 };
     });
-    comprobar(marq.estribillo < -5 && marq.lista > 5 && Math.abs(marq.estribillo) > Math.abs(marq.lista) * 1.4,
-      'marquesina: dos carriles, dos velocidades y sentidos → ' + JSON.stringify(marq));
+    comprobar(marq.avance < -5 && marq.veces === 1 && marq.estribilloVisible,
+      'marquesina: «Tráemelo» una sola vez y quieto, los papeles pasando → ' + JSON.stringify(marq));
     if (conCapturas) await page.screenshot({ path: foto('04-marquesina.png') });
 
     /* la pila y la bandeja */
@@ -650,7 +669,7 @@ try {
     comprobar(b.n === 5 && b.puestas === 5, 'movimiento reducido: la bandeja cuenta igual → ' + JSON.stringify(b));
     const cifra = await page.textContent('.resenas__cifra');
     comprobar(cifra.trim() === '5,0', 'movimiento reducido: el contador muestra el dato → ' + cifra);
-    const marq = await page.evaluate(() => getComputedStyle(document.getElementById('carril-estribillo')).transform);
+    const marq = await page.evaluate(() => getComputedStyle(document.getElementById('carril-lista')).transform);
     comprobar(marq === 'none', 'movimiento reducido: la marquesina está quieta');
     if (conCapturas) await page.screenshot({ path: foto('41-movimiento-reducido.png') });
     comprobar(errores.length === 0, 'movimiento reducido: consola sin errores' + (errores.length ? ' → ' + errores.join(' | ') : ''));

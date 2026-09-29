@@ -168,11 +168,13 @@ html.con-js .cortina.fuera { display: none !important; }   /* gana a cualquier r
 .cortina__labio path { fill: var(--tinta); }
 .cortina__hoja {
   position: relative;
-  width: min(72vw, 440px); aspect-ratio: 1 / 1.28;
+  --ancho-hoja: min(72vw, 440px);
+  width: var(--ancho-hoja); aspect-ratio: 1 / 1.28;
   background: var(--papel); color: var(--tinta);
   border-radius: 3px;
   box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .7);
-  padding: 9% 9% 8%;
+  /* el % de un padding se mide contra el ancho del padre (la pantalla), no de la hoja */
+  padding: calc(var(--ancho-hoja) * .09) calc(var(--ancho-hoja) * .09) calc(var(--ancho-hoja) * .08);
   display: flex; flex-direction: column; justify-content: flex-end;
   will-change: transform;
 }
@@ -187,7 +189,7 @@ html.con-js .cortina.fuera { display: none !important; }   /* gana a cualquier r
 }
 .cortina__nombre {
   margin: 0;
-  font: 400 clamp(2.1rem, 7.6vw, 3.9rem)/.98 var(--tipo-rotulo);
+  font: 400 calc(var(--ancho-hoja) * .125)/.98 var(--tipo-rotulo);
   letter-spacing: -.01em;
 }
 .cortina__nombre span { display: block; overflow: hidden; padding: .1em 0; margin: -.1em 0; }
@@ -390,21 +392,30 @@ html.con-js .cortina.fuera { display: none !important; }   /* gana a cualquier r
 .hero.hero--recogido .taza { opacity: 1; scale: 1; }
 .hero.hero--recogido .hero__frase--despues .letra { transform: none !important; }
 
-/* ═══════════════ marquesina a dos velocidades ═══════════════ */
+/* ═══════════════ marquesina: «Tráemelo» quieto y los papeles pasando ═══════════════ */
 .marquesina {
   position: relative; z-index: 2;
   background: var(--tinta); color: var(--papel);
   padding: 1.6rem 0 1.4rem;
   overflow: hidden;
+  display: grid; grid-template-columns: auto 1fr; align-items: baseline;
+}
+.marquesina__estribillo {
+  margin: 0; padding: 0 1.6rem 0 var(--margen);
+  font: italic 400 clamp(2.6rem, 7vw, 6rem)/1 var(--tipo-rotulo); color: var(--mostaza);
+  white-space: nowrap;
+}
+.marquesina__ventana {
+  overflow: hidden; min-width: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4rem);
+          mask-image: linear-gradient(to right, transparent, #000 4rem);
 }
 .marquesina__carril { display: flex; width: max-content; white-space: nowrap; will-change: transform; }
 .marquesina__grupo { display: flex; align-items: baseline; padding-right: 2.2rem; }
 .marquesina__grupo span { padding-right: 2.2rem; }
 .marquesina__grupo i { align-self: center; width: 8px; height: 8px; border-radius: 50%; background: var(--mostaza); margin-right: 2.2rem; }
-.marquesina__carril--estribillo { font: italic 400 clamp(2.6rem, 7vw, 6rem)/1 var(--tipo-rotulo); color: var(--mostaza); }
-.marquesina__carril--estribillo .marquesina__grupo i { background: var(--papel); opacity: .35; width: 10px; height: 10px; }
-.marquesina__carril--lista { margin-top: .5rem; font: 500 clamp(1rem, 1.6vw, 1.25rem)/1 var(--tipo-texto); letter-spacing: .02em; color: var(--papel-apagado); }
-.marquesina__carril--lista .marquesina__grupo i { background: var(--mostaza); width: 6px; height: 6px; }
+.marquesina__carril--lista { font: 400 clamp(2.6rem, 7vw, 6rem)/1 var(--tipo-rotulo); color: var(--papel); }
+.marquesina__carril--lista .marquesina__grupo i { background: var(--mostaza); width: 9px; height: 9px; }
 
 /* ═══════════════ los papeles (servicios): pila de hojas ═══════════════ */
 .papeles {
@@ -850,7 +861,10 @@ html.con-cursor, html.con-cursor * { cursor: none !important; }
   .hero__desliza { display: none; }
   .hero .taza { width: 84px; height: 84px; }
 
-  .marquesina { padding: 1.2rem 0 1rem; }
+  .marquesina { padding: 1.2rem 0 1rem; grid-template-columns: 1fr; }
+  .marquesina__estribillo { padding: 0 var(--margen) .3rem; font-size: 2.4rem; }
+  .marquesina__ventana { -webkit-mask-image: none; mask-image: none; }
+  .marquesina__carril--lista { font-size: 1.9rem; }
 
   .pila__item { position: static; margin-bottom: 1.2rem; }
   .pila::after { display: none; }

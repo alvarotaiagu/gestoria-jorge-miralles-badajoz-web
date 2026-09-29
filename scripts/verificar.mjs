@@ -126,7 +126,7 @@ try {
     comprobar(/<meta charset="utf-8">\s*<meta name="robots" content="noindex, nofollow">/.test(texto), p + ': noindex, nofollow justo tras el charset');
     const prohibidos = [
       [/924\s?65\s?66\s?97/, 'el fijo sin confirmar'],
-      [/Universidad Europea/i, 'la formación sin confirmar'],
+      [/Pajuelo|Griñ[oó]n/i, 'el nombre de su empresa anterior (sale de LinkedIn, no se publica sin su permiso)'],
       [/colegiado n(\.º|º|úm)\s*\d/i, 'un número de colegiado'],
       [/onsurbe-abogados\.com/i, 'un enlace a la web de Onsurbe'],
       [/wa\.me\/\+?34\d{9}/, 'un WhatsApp dado por hecho'],
@@ -315,8 +315,11 @@ try {
     await hasta(page, '#quien');
     if (conCapturas) await page.screenshot({ path: foto('09-quien.png') });
     const pendientes = await page.evaluate(() => [...document.querySelectorAll('#quien .marca-pendiente')].map(n => n.textContent));
-    comprobar(pendientes.length >= 3 && pendientes.join(' ').includes('colegiado') && pendientes.join(' ').includes('fijo') && pendientes.join(' ').includes('formación'),
-      'quién: marcadores visibles de formación, colegiado y fijo → ' + pendientes.join(' | '));
+    comprobar(pendientes.length >= 2 && pendientes.join(' ').includes('colegiado') && pendientes.join(' ').includes('fijo') && !pendientes.join(' ').includes('formación'),
+      'quién: marcadores visibles de colegiado y fijo (la formación ya está confirmada) → ' + pendientes.join(' | '));
+    const datos = await page.evaluate(() => [...document.querySelectorAll('.quien__datos li')].map(li => li.textContent.replace(/\s+/g, ' ').trim()));
+    comprobar(datos.length === 4 && /Universidad Europea/.test(datos.join()) && /CEF/.test(datos.join()),
+      'quién: trayectoria del LinkedIn (2016, CEF, máster UE, 2025) → ' + datos.join(' | '));
     await hasta(page, '#resenas');
     await page.waitForTimeout(1800);
     if (conCapturas) await page.screenshot({ path: foto('10-resenas.png') });
@@ -583,8 +586,18 @@ try {
       await rueda(page, 4, 700);
       await page.screenshot({ path: foto('39-movil-pie.png') });
     }
+    await page.evaluate(() => { window.scrollTo(0, 0); return 0; });
+    await page.waitForTimeout(600);
+    const bArriba = await page.evaluate(() => document.getElementById('bandeja').classList.contains('bandeja--fuera'));
+    await hasta(page, '#hoja-fiscal');
+    await page.waitForTimeout(700);
     const bMovil = await bandeja(page);
-    comprobar(bMovil.seVe, 'móvil: la bandeja fija se ve (elementFromPoint) → ' + JSON.stringify(bMovil));
+    const pildora = await page.evaluate(() => { const r = document.getElementById('bandeja').getBoundingClientRect(); return { alto: Math.round(r.height), ancho: Math.round(r.width) }; });
+    await hasta(page, '#donde');
+    await page.waitForTimeout(700);
+    const bDespues = await page.evaluate(() => document.getElementById('bandeja').classList.contains('bandeja--fuera'));
+    comprobar(bArriba && bMovil.seVe && pildora.alto <= 48 && pildora.ancho <= 130 && bDespues,
+      'móvil: la bandeja es una píldora pequeña y solo aparece mientras pasan las hojas → ' + JSON.stringify({ bArriba, seVe: bMovil.seVe, pildora, bDespues }));
     comprobar(errores.length === 0, 'móvil: consola sin errores' + (errores.length ? ' → ' + errores.join(' | ') : ''));
     await contexto.close();
   }
@@ -607,7 +620,22 @@ try {
     comprobar(r0.cruzan === 0 && r0.texto[3] <= r0.mesaTop + 1 && r0.fuera === 0 && r0.ancho <= 1, 'hero ' + vp.width + '×' + vp.height + ': texto y papeles no se pisan, ningún papel se sale, sin scroll horizontal → ' + JSON.stringify({ texto: r0.texto, mesaTop: r0.mesaTop, cruzan: r0.cruzan, fuera: r0.fuera, ancho: r0.ancho }));
     if (conCapturas) await page.screenshot({ path: foto('3b-hero-' + vp.width + 'x' + vp.height + '.png') });
     await page.mouse.move(vp.width / 2, vp.height / 2);
-    await rueda(page, 4, 300, 200);
+    const tramo = Math.round(1.02 * vp.height);
+    await rueda(page, 6, Math.round(tramo / 6), 200);
+    await page.waitForTimeout(1000);
+    const fr = await page.evaluate(() => {
+      const f = document.getElementById('frase-despues').getBoundingClientRect();
+      const letras = [...document.querySelectorAll('#frase-despues .letra')];
+      return {
+        anclado: !!document.querySelector('.hero').closest('.pin-spacer'),
+        top: Math.round(f.top), bottom: Math.round(f.bottom), alto: innerHeight,
+        asentadas: letras.length > 0 && letras.every(x => Math.abs(new DOMMatrix(getComputedStyle(x).transform).m42) < 2)
+      };
+    });
+    comprobar(fr.anclado && fr.top >= 0 && fr.bottom <= fr.alto && fr.asentadas,
+      'hero ' + vp.width + '×' + vp.height + ': anclado, y «Lo tuyo, fuera de tu mesa» se lee entero y quieto antes de soltarse → ' + JSON.stringify(fr));
+    if (conCapturas) await page.screenshot({ path: foto('3c-frase-' + vp.width + 'x' + vp.height + '.png') });
+    await rueda(page, 2, Math.max(0, Math.round((1200 - tramo) / 2)), 200);
     const r1 = await medir();
     const m1 = await mesa(page);
     comprobar(m1.dispersion <= 30 && m1.grapa && m1.taza && r1.cruzan === 0 && r1.fuera === 0 && r1.taza[2] <= vp.width + 2,

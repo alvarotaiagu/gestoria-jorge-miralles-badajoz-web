@@ -523,6 +523,8 @@ html.con-js .cortina.fuera { display: none !important; }   /* gana a cualquier r
   background-origin: content-box; background-clip: content-box; padding: 8px 7px 5px;
 }
 .bandeja__hoja.puesta { opacity: 1; }
+/* fuera de la sección de los papeles no pinta nada en pantalla */
+.bandeja--fuera { opacity: 0; visibility: hidden; pointer-events: none; }
 .bandeja__grapa { position: absolute; left: 34px; top: 12px; opacity: 0; scale: 1.6; transition: opacity .3s ease, scale .5s cubic-bezier(.34, 1.56, .64, 1); rotate: -14deg; }
 .bandeja--grapada .bandeja__grapa { opacity: 1; scale: 1; }
 .bandeja__cuenta { font: 400 1.05rem/1 var(--tipo-rotulo); letter-spacing: 0; text-transform: none; }
@@ -561,6 +563,9 @@ html.con-js .cortina.fuera { display: none !important; }   /* gana a cualquier r
 .quien__texto { max-width: 34rem; }
 .quien__texto p { color: var(--papel-apagado); }
 .quien__nota { font-size: .86rem; }
+.quien__datos { list-style: none; margin: 1.4rem 0 1.2rem; padding: 0; border-top: 1px solid rgba(251, 248, 241, .14); }
+.quien__datos li { display: grid; grid-template-columns: 3.4rem 1fr; gap: 1rem; align-items: baseline; padding: .55rem 0; border-bottom: 1px solid rgba(251, 248, 241, .14); color: var(--papel); font-size: .95rem; }
+.quien__datos span { font: italic 400 1.25rem/1 var(--tipo-rotulo); color: var(--mostaza); }
 .tarjeta {
   position: relative;
   justify-self: center; width: min(100%, 30rem); aspect-ratio: 1.75 / 1;
@@ -836,7 +841,7 @@ html.con-cursor, html.con-cursor * { cursor: none !important; }
   /* hero: el texto en flujo arriba y la mesa debajo; cuatro papeles */
   .hero {
     grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(300px, 1fr);
+    grid-template-rows: auto minmax(200px, 1fr);
     align-content: start;
     min-height: 100vh; min-height: 100svh;
     padding: calc(var(--cab) + 1.2rem) var(--margen) 1.4rem;
@@ -851,7 +856,7 @@ html.con-cursor, html.con-cursor * { cursor: none !important; }
   .hero__entrada { font-size: .98rem; }
   .hero__acciones { margin-top: 1.1rem; }
   .hero__nota { margin-top: .9rem; }
-  .hero__mesa { position: relative; inset: auto; min-height: 300px; margin-top: .4rem; }
+  .hero__mesa { position: relative; inset: auto; min-height: 200px; margin-top: .4rem; }
   .hero__mesa .papel { --ancho-papel: clamp(118px, 34vw, 150px); left: var(--mx, var(--x)); top: var(--my, var(--y)); rotate: var(--mr, var(--r)); }
   .con-movimiento .hero:not(.hero--recogido) .papel { rotate: 0deg; }
   .hero.hero--recogido .papel { rotate: var(--sr, 0deg); }
@@ -861,10 +866,12 @@ html.con-cursor, html.con-cursor * { cursor: none !important; }
   .hero__desliza { display: none; }
   .hero .taza { width: 84px; height: 84px; }
 
-  .marquesina { padding: 1.2rem 0 1rem; grid-template-columns: 1fr; }
-  .marquesina__estribillo { padding: 0 var(--margen) .3rem; font-size: 2.4rem; }
-  .marquesina__ventana { -webkit-mask-image: none; mask-image: none; }
+  .marquesina { padding: 1rem 0 .9rem; }
+  .marquesina__estribillo { padding: 0 .9rem 0 var(--margen); font-size: 1.9rem; }
+  .marquesina__ventana { -webkit-mask-image: linear-gradient(to right, transparent, #000 1.8rem); mask-image: linear-gradient(to right, transparent, #000 1.8rem); }
   .marquesina__carril--lista { font-size: 1.9rem; }
+  .marquesina__grupo span { padding-right: 1.3rem; }
+  .marquesina__grupo i { margin-right: 1.3rem; }
 
   .pila__item { position: static; margin-bottom: 1.2rem; }
   .pila::after { display: none; }
@@ -878,13 +885,12 @@ html.con-cursor, html.con-cursor * { cursor: none !important; }
   .donde__cuerpo { grid-template-columns: 1fr; }
   .pie { grid-template-columns: 1fr 1fr; }
   .pie__mesa { grid-column: 1 / -1; }
-  .bandeja { width: 100px; padding: .45rem .45rem .4rem; }
-  .bandeja__caja { width: 84px; height: 60px; }
-  .bandeja__hoja { width: 46px; height: 32px; margin: -16px 0 0 -23px; padding: 6px 5px 4px; }
-  .bandeja__grapa { left: 25px; top: 8px; }
+  /* en móvil la bandeja es una píldora con la cuenta, y solo mientras pasan las hojas */
+  .bandeja { width: auto; right: .8rem; bottom: .8rem; grid-auto-flow: column; align-items: baseline; gap: .5rem; padding: .55rem .9rem; border-radius: 999px; }
+  .bandeja__caja { display: none; }
   /* con el aviso de cookies en pantalla, la bandeja sube lo que mide el aviso (lo mide el JS) */
   .cookies-visibles .bandeja, .cookies-visibles .indice { transform: translateY(calc(-1 * var(--alto-cookies, 9rem))); }
-  .pie { padding-bottom: 8rem; }
+  .pie { padding-bottom: 3.5rem; }
 }
 
 @media (max-width: 560px) {

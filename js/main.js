@@ -296,9 +296,9 @@
       var fin = (vis.length - 1) * 0.8 + 2.2;
       tl.fromTo(taza, { autoAlpha: 0, scale: 0.7, y: 40 }, { autoAlpha: 1, scale: 1, y: 0, duration: 1.1, ease: 'power2.out', immediateRender: false }, fin - 0.6)
         .fromTo(grapa, { autoAlpha: 0, y: -46 }, { autoAlpha: 1, y: 0, duration: 1, ease: 'bounce.out', immediateRender: false }, fin + 0.2)
-        .to(antes, { y: -34, autoAlpha: 0, duration: 0.8, ease: 'power2.in' }, fin - 0.35)
-        .fromTo(letrasDespues, { yPercent: 135, y: 0 }, { yPercent: 0, y: 0, duration: 1.2, stagger: 0.03, ease: 'power3.out', immediateRender: false }, fin + 0.05)
-        .to({}, { duration: 0.8 });   /* un respiro con la mesa ya recogida antes de soltar el anclaje */
+        .to(antes, { y: -34, autoAlpha: 0, duration: 0.8, ease: 'power2.in' }, fin - 1.3)
+        .fromTo(letrasDespues, { yPercent: 135, y: 0 }, { yPercent: 0, y: 0, duration: 1.2, stagger: 0.03, ease: 'power3.out', immediateRender: false }, fin - 0.9)
+        .to({}, { duration: 1.8 });   /* respiro largo: «Lo tuyo, fuera de tu mesa» se lee quieto antes de soltar el anclaje */
 
       var cabe = seccion.offsetHeight <= window.innerHeight + 24;
       st = ST.create({
@@ -465,6 +465,7 @@
     var hojasBandeja = Array.prototype.slice.call(document.querySelectorAll('.bandeja__hoja'));
     var indice = Array.prototype.slice.call(document.querySelectorAll('#indice li'));
     var pieDoc = document.getElementById('pie');
+    var secPapeles = document.getElementById('papeles');
     var n = -1;
 
     function volar(i) {
@@ -508,6 +509,10 @@
       var pie = pieDoc ? pieDoc.getBoundingClientRect() : null;
       var grapada = n === items.length && pie && pie.top < window.innerHeight - 40;
       bandeja.classList.toggle('bandeja--grapada', !!grapada);
+      /* solo desde que empiezan los papeles; en móvil, además, se va al acabar la pila */
+      var sp = secPapeles.getBoundingClientRect();
+      var dentro = sp.top < window.innerHeight * 0.7 && (!esMovil() || sp.bottom > window.innerHeight * 0.45);
+      bandeja.classList.toggle('bandeja--fuera', !dentro);
     }
     revisarBandeja = revisar;
     window.addEventListener('scroll', revisar, { passive: true });

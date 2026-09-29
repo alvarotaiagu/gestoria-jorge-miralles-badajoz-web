@@ -44,7 +44,7 @@ Ver `../gestoria-jorge-miralles-badajoz-bocetos/DATOS-MIRALLES.md`. En resumen: 
 ## Lista de `[PENDIENTE]` (visible en la web)
 
 - [ ] **Teléfono fijo 924 65 66 97**: sale solo de un resumen de buscador. No está en la web (un test falla si aparece).
-- [ ] **Formación** («Universidad Europea»): sin fuente legible. No está en la web.
+- [x] **Formación y trayectoria**: confirmadas en su LinkedIn (29-09-2026). Asesor fiscal y contable desde 2016, curso de tributación en el CEF (2017–2018), máster de Gestor Administrativo en la Universidad Europea (2021–2022) y gestoría propia desde febrero de 2025. El nombre de la empresa anterior no se publica.
 - [ ] **Número de colegiado y colegio profesional**: sin fuente. Marcadores en «Quién», pie y aviso legal.
 - [ ] **Relación con Onsurbe Abogados**: se menciona la colaboración sin enlace. Marcador en la hoja «Legal».
 - [ ] **WhatsApp**: no se da por hecho que el móvil lo tenga. Token `NUMERO-PENDIENTE` en el `href` y diálogo explicativo.
@@ -90,7 +90,7 @@ node scripts/versionar.mjs           # antes de cada commit que toque CSS o JS
 
 `verificar.mjs` sirve el sitio bajo el prefijo del repo y comprueba, con `mouse.wheel` (Lenis):
 
-- **Datos**: en ninguna página aparece el fijo, «Universidad Europea», un número de colegiado, un enlace a Onsurbe, un WhatsApp dado por hecho ni prueba social en plural; `noindex` justo tras el charset; JSON-LD sin `aggregateRating`; CSS/JS versionados; Lenis desde jsDelivr; sin las tipografías de Botejara; ningún `filter` ni sombra animados en el JS.
+- **Datos**: en ninguna página aparece el fijo, el nombre de su empresa anterior, un número de colegiado, un enlace a Onsurbe, un WhatsApp dado por hecho ni prueba social en plural; `noindex` justo tras el charset; JSON-LD sin `aggregateRating`; CSS/JS versionados; Lenis desde jsDelivr; sin las tipografías de Botejara; ningún `filter` ni sombra animados en el JS.
 - **Cortina**: la hoja cae desde arriba, se aparta a un lado, su color no es el del hero, y acaba en `display:none` en las tres pasadas (normal, sin GSAP, movimiento reducido).
 - **Hero**: entra desordenado y anclado; a media bajada los papeles vuelan; al final el montón está completo, grapado (la grapa en la esquina del papel de arriba), con la taza, y el titular ha cambiado. Cursor propio: aro + punto, se rellena sobre botones y dice «coger» sobre un papel, que se levanta con la sombra cacheada.
 - **Marquesina**: dos carriles a dos velocidades y sentidos.
@@ -127,7 +127,7 @@ Pasos para borrarlo. Están comprobados por `scripts/comprobar-borrado.mjs`, que
 
 ## Antes de publicar como web del cliente
 
-- [ ] Resolver los pendientes de arriba (fijo, formación, colegiado, Onsurbe, WhatsApp, horario de verano, logo, foto, NIF, primera persona).
+- [ ] Resolver los pendientes de arriba (fijo, colegiado, Onsurbe, WhatsApp, horario de verano, logo, foto, NIF, primera persona).
 - [ ] Borrar el mando y pasar `comprobar-borrado.mjs`.
 - [ ] Quitar el `noindex` de las cuatro páginas.
 - [ ] `node scripts/versionar.mjs` y `node scripts/verificar.mjs`.

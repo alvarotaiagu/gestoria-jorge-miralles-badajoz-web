@@ -49,7 +49,23 @@ Ver `../gestoria-jorge-miralles-badajoz-bocetos/DATOS-MIRALLES.md`. En resumen: 
 - [ ] **Relación con Onsurbe Abogados**: se menciona la colaboración sin enlace. Marcador en la hoja «Legal».
 - [ ] **WhatsApp**: no se da por hecho que el móvil lo tenga. Token `NUMERO-PENDIENTE` en el `href` y diálogo explicativo.
 - [ ] **Horario de verano**: nota discreta en «Horario y dónde».
-- [ ] **Logo**: no había ninguno. La marca provisional es una hoja grapada (`assets/favicon.svg` y el `<symbol id="logo">` de `index.html`).
+- [x] **Logo**: no tenía. Elegido el 29-09-2026 el «Grapa» (boceto A de `../gestoria-jorge-miralles-badajoz-bocetos/logos.html`): sus iniciales JM en Instrument Serif unidas por una grapa mostaza. Falta que **él** lo apruebe: se le enseñan los seis bocetos.
+
+## Logo «Grapa»
+
+Trazado a curvas, no depende de ninguna fuente instalada:
+
+```
+python scripts/generar-logo.py     # SVG + favicon + <symbol> (fuentes OFL en scripts/fuentes, kerning con HarfBuzz)
+node scripts/exportar-logo.mjs     # PNG transparentes a partir de esos SVG
+```
+
+- `assets/logo/marca.svg` / `marca-claro.svg`: solo JM + grapa, para fondo claro / oscuro (+ PNG de 1024).
+- `assets/logo/logo.svg` / `logo-claro.svg`: marca + «Jorge Miralles» + «Gestoría · Badajoz» (+ PNG de 2400 de ancho).
+- `assets/favicon.svg`, `assets/logo/icono-512.png`, `assets/apple-touch-icon.png`: la marca sobre el linóleo.
+- En la web: cabecera, membrete de la hoja de la cortina, tarjeta de visita, pie, páginas legales e imagen para compartir.
+- La grapa del `<symbol>` se pinta con `--logo-grapa`: dentro de un `<use>` no entra ningún selector de la página, pero las custom properties sí se heredan. Cada `<svg>` que lo usa pone su `--logo-grapa`.
+- Si cambia el `<symbol>`, se pega el de `assets/logo/simbolo.txt` en el sprite de `index.html`; las legales llevan el mismo trazo en línea.
 - [ ] **Foto**: hueco marcado en la tarjeta de visita.
 - [ ] **NIF** para el aviso legal y la privacidad.
 - [ ] **Primera persona** («tráemelo», «yo me encargo», «soy Jorge»): pendiente de su visto bueno.
@@ -73,7 +89,7 @@ privacidad.html     borrador; lista lo que se guarda en localStorage
 manifest.json
 css/estilos.css
 js/main.js          GSAP 3.12.5 + ScrollTrigger + Lenis 1.1.13, desde jsDelivr (cdnjs ya no sirve Lenis)
-assets/             favicon.svg, og-miralles.png (1200×630)
+assets/             favicon.svg, apple-touch-icon.png, og-miralles.png (1200×630), logo/ (marca y logotipo en SVG y PNG)
 scripts/            servir.mjs, verificar.mjs, contraste.mjs, comprobar-borrado.mjs, versionar.mjs
 screenshots/        escritorio y móvil: cortina, hero a mitad de recoger y recogido, secciones, densidades, sin GSAP, movimiento reducido, 404, legales
 ```
@@ -127,7 +143,7 @@ Pasos para borrarlo. Están comprobados por `scripts/comprobar-borrado.mjs`, que
 
 ## Antes de publicar como web del cliente
 
-- [ ] Resolver los pendientes de arriba (fijo, colegiado, Onsurbe, WhatsApp, horario de verano, logo, foto, NIF, primera persona).
+- [ ] Resolver los pendientes de arriba (fijo, colegiado, Onsurbe, WhatsApp, horario de verano, visto bueno del logo, foto, NIF, primera persona).
 - [ ] Borrar el mando y pasar `comprobar-borrado.mjs`.
 - [ ] Quitar el `noindex` de las cuatro páginas.
 - [ ] `node scripts/versionar.mjs` y `node scripts/verificar.mjs`.

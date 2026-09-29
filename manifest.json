@@ -5,5 +5,9 @@
   "display": "browser",
   "background_color": "#4F6B5E",
   "theme_color": "#4F6B5E",
-  "icons": [{ "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "assets/logo/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
 }

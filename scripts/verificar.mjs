@@ -150,6 +150,15 @@ try {
     comprobar(/height:\s*100dvh/.test(css), 'CSS: el menú móvil lleva height:100dvh');
     comprobar(/--acento-texto:\s*color-mix/.test(css), 'CSS: --acento-texto derivado con color-mix');
     comprobar(!/Libre Caslon|Public Sans/.test(css) && !/Libre\+Caslon|Public\+Sans/.test(html), 'sin las tipografías de Botejara');
+    /* el logo «Grapa»: a curvas y el mismo en todas partes */
+    const simbolo = (html.match(/<symbol id="logo"[\s\S]*?<\/symbol>/) || [''])[0];
+    const favicon = fs.readFileSync(path.join(raiz, 'assets/favicon.svg'), 'utf8');
+    const ficherosLogo = ['assets/logo/marca.svg', 'assets/logo/marca-claro.svg', 'assets/logo/logo.svg', 'assets/logo/logo-claro.svg',
+      'assets/logo/marca.png', 'assets/logo/logo.png', 'assets/logo/logo-claro.png', 'assets/logo/icono-512.png', 'assets/apple-touch-icon.png'];
+    const faltan = ficherosLogo.filter(f => !fs.existsSync(path.join(raiz, f)));
+    comprobar(/viewBox="0 0 64 64"/.test(simbolo) && /class="logo-grapa" d="M12 25v-9h40v9"/.test(simbolo) && !/<text/.test(simbolo + favicon) && !/<rect/.test(simbolo) && faltan.length === 0,
+      'logo «Grapa»: símbolo y favicon a curvas (sin <text>), con su grapa, y los SVG/PNG sueltos en assets/logo' + (faltan.length ? ' → faltan ' + faltan.join(', ') : ''));
+    comprobar(!/hoja grapada/.test(html + fs.readFileSync(path.join(raiz, 'aviso-legal.html'), 'utf8')), 'no queda rastro de la marca provisional (la hoja grapada)');
     const js = fs.readFileSync(path.join(raiz, 'js/main.js'), 'utf8');
     comprobar(!/filter\s*:|shadowBlur|boxShadow\s*:/.test(js), 'JS: ningún filter ni sombra animados por fotograma');
     comprobar(/ResizeObserver/.test(js) && /ST\.refresh\(\)/.test(js), 'JS: ResizeObserver + ScrollTrigger.refresh()');

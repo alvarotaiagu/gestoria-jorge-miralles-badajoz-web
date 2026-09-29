@@ -203,6 +203,13 @@ html.con-js .cortina.fuera { display: none !important; }   /* gana a cualquier r
   color: var(--tinta-suave);
 }
 .con-js .cortina__pie { opacity: 0; }
+/* membrete: el logo arriba a la izquierda de la hoja */
+.cortina__marca {
+  position: absolute; top: calc(var(--ancho-hoja) * .075); left: calc(var(--ancho-hoja) * .085);
+  width: calc(var(--ancho-hoja) * .15); height: calc(var(--ancho-hoja) * .15);
+  color: var(--tinta);
+}
+.cortina__marca { --logo-grapa: var(--acento-texto); }
 @media (prefers-reduced-motion: reduce) { .cortina { display: none !important; } }
 
 /* ═══════════════ cabecera ═══════════════ */
@@ -225,7 +232,7 @@ html.con-js .cortina.fuera { display: none !important; }   /* gana a cualquier r
   color: inherit; text-decoration: none;
 }
 .cabecera__logo { flex: none; display: block; color: var(--papel); }
-.cabecera__logo .logo-grapa { color: var(--mostaza); }
+.cabecera__logo { --logo-grapa: var(--mostaza); }
 .cabecera__nombre {
   display: flex; flex-direction: column;
   font: 400 1.45rem/1 var(--tipo-rotulo);
@@ -590,7 +597,8 @@ html.con-js .cortina.fuera { display: none !important; }   /* gana a cualquier r
   font: 500 .58rem/1.3 ui-monospace, Menlo, Consolas, monospace; color: var(--acento-texto); padding: .3rem;
 }
 .tarjeta__pendientes { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .3rem .5rem; margin: 0; }
-.tarjeta .logo-grapa { color: var(--mostaza); }
+.tarjeta__logo { display: block; width: 2.6rem; height: 2.6rem; margin: 0 0 .6rem -.2rem; color: var(--tinta); }
+.tarjeta__logo { --logo-grapa: var(--acento-texto); }
 
 /* ═══════════════ reseñas ═══════════════ */
 .resenas {
@@ -683,6 +691,8 @@ html.con-js .cortina.fuera { display: none !important; }   /* gana a cualquier r
 .pie__mesa p { margin: 0; color: var(--papel-apagado); }
 .pie__nombre { display: block; font: 400 1.7rem/1.15 var(--tipo-rotulo); color: var(--papel); }
 .pie__lema { font: italic 400 1.15rem/1.3 var(--tipo-rotulo); color: var(--mostaza); }
+.pie__logo { width: 1.5em; height: 1.5em; vertical-align: -.36em; margin-right: .4em; color: var(--papel); }
+.pie__logo { --logo-grapa: var(--mostaza); }
 .pie h2 { font: 600 .7rem/1 var(--tipo-texto); letter-spacing: .22em; text-transform: uppercase; color: var(--acento-claro); margin-bottom: 1rem; }
 .pie__columna p { margin: 0 0 .5rem; }
 .pie a { text-decoration: none; }
